@@ -41,11 +41,24 @@ public class MenuServiceImpl implements MenuService {
 		Menu node = dao.getOne(id);
 		menu.setId(uuid);
 		menu.setMenuSeq(node.getMenuSeq().concat(".").concat(uuid));
-		menu.setMenuLevel(node.getMenuLevel()+1);
+		menu.setMenuLevel(node.getMenuLevel() + 1);
 		menu.setParentId(id);
 		menu.setIsShow("true");
 		menu.setCreateTime(new Date());
 		menu.setUpdateTime(new Date());
 		return dao.save(menu);
+	}
+
+	@Override
+	public Menu update(Menu menu, String id) {
+		Menu oldMenu = dao.findById(id).get();
+		oldMenu.setMenuLabel(menu.getMenuLabel());
+		oldMenu.setMenuUrl(menu.getMenuUrl());
+		return dao.save(oldMenu);
+	}
+
+	@Override
+	public void deleteCascadeMenusById(String id) {
+		dao.deleteCascadeMenusById("%" + id + "%");
 	}
 }

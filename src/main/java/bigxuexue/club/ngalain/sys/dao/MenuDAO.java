@@ -18,5 +18,9 @@ public interface MenuDAO extends JpaRepository<Menu, String>, JpaSpecificationEx
 	
 	@Query("select count(*) from Menu m where m.parentId in ?1")
 	int queryChildCount(String parentId);
+
+	@Modifying
+	@Query("DELETE FROM Menu WHERE menuSeq LIKE ?1")
+	void deleteCascadeMenusById(String id);
 	
 }

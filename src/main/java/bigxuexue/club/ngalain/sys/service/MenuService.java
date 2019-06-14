@@ -13,4 +13,8 @@ public interface MenuService {
 	int queryChildCount(String parentId);
 
 	Menu create(Menu menu, String id);
+
+	Menu update(Menu menu, String id);
+
+	void deleteCascadeMenusById(String id);
 }

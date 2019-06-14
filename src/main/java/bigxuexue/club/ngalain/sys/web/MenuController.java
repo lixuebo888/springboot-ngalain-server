@@ -113,5 +113,15 @@ public class MenuController {
 	public Menu saveMenu(@RequestBody Menu menu, @PathVariable("id") String id) {
 		return menuService.create(menu, id);
 	}
+	
+	@PostMapping("/{id}/edit")
+	public Menu editMenu(@RequestBody Menu menu, @PathVariable("id") String id) {
+		return menuService.update(menu, id);
+	}
+	
+	@PostMapping("/{id}/delete")
+	public void deleteMenu(@PathVariable("id") String id) {
+		menuService.deleteCascadeMenusById(id);
+	}
 
 }
